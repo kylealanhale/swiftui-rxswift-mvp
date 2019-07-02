@@ -14,6 +14,12 @@
 		7004242922C5502E00DE71CD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7004242822C5502E00DE71CD /* Preview Assets.xcassets */; };
 		7004242C22C5502E00DE71CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7004242A22C5502E00DE71CD /* LaunchScreen.storyboard */; };
 		7004243722C5502E00DE71CD /* BabylonDemoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7004243622C5502E00DE71CD /* BabylonDemoAppTests.swift */; };
+		7004244322C557D000DE71CD /* PostsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7004244222C557D000DE71CD /* PostsAPI.swift */; };
+		70B9A5C122C826CE001804E4 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70B9A5C022C826CE001804E4 /* RxSwift.framework */; };
+		70B9A5C222C826CE001804E4 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 70B9A5C022C826CE001804E4 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		70B9A5C622C9244F001804E4 /* PostsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9A5C522C9244F001804E4 /* PostsModel.swift */; };
+		70B9A5C822C92756001804E4 /* PostsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9A5C722C92756001804E4 /* PostsPresenter.swift */; };
+		70B9A5CB22C969B5001804E4 /* PostsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9A5CA22C969B5001804E4 /* PostsPresenterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +31,20 @@
 			remoteInfo = BabylonDemoApp;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		70B9A5C322C826CE001804E4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				70B9A5C222C826CE001804E4 /* RxSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7004241C22C5502C00DE71CD /* BabylonDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabylonDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,6 +58,11 @@
 		7004243222C5502E00DE71CD /* BabylonDemoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BabylonDemoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7004243622C5502E00DE71CD /* BabylonDemoAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabylonDemoAppTests.swift; sourceTree = "<group>"; };
 		7004243822C5502E00DE71CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7004244222C557D000DE71CD /* PostsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsAPI.swift; sourceTree = "<group>"; };
+		70B9A5C022C826CE001804E4 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		70B9A5C522C9244F001804E4 /* PostsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsModel.swift; sourceTree = "<group>"; };
+		70B9A5C722C92756001804E4 /* PostsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsPresenter.swift; sourceTree = "<group>"; };
+		70B9A5CA22C969B5001804E4 /* PostsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsPresenterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70B9A5C122C826CE001804E4 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +90,7 @@
 				7004241E22C5502C00DE71CD /* BabylonDemoApp */,
 				7004243522C5502E00DE71CD /* BabylonDemoAppTests */,
 				7004241D22C5502C00DE71CD /* Products */,
+				70B9A5BF22C826CE001804E4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +113,9 @@
 				7004242A22C5502E00DE71CD /* LaunchScreen.storyboard */,
 				7004242D22C5502E00DE71CD /* Info.plist */,
 				7004242722C5502E00DE71CD /* Preview Content */,
+				7004244222C557D000DE71CD /* PostsAPI.swift */,
+				70B9A5C522C9244F001804E4 /* PostsModel.swift */,
+				70B9A5C722C92756001804E4 /* PostsPresenter.swift */,
 			);
 			path = BabylonDemoApp;
 			sourceTree = "<group>";
@@ -103,8 +133,17 @@
 			children = (
 				7004243622C5502E00DE71CD /* BabylonDemoAppTests.swift */,
 				7004243822C5502E00DE71CD /* Info.plist */,
+				70B9A5CA22C969B5001804E4 /* PostsPresenterTests.swift */,
 			);
 			path = BabylonDemoAppTests;
+			sourceTree = "<group>";
+		};
+		70B9A5BF22C826CE001804E4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				70B9A5C022C826CE001804E4 /* RxSwift.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -117,6 +156,8 @@
 				7004241822C5502C00DE71CD /* Sources */,
 				7004241922C5502C00DE71CD /* Frameworks */,
 				7004241A22C5502C00DE71CD /* Resources */,
+				70B9A5C322C826CE001804E4 /* Embed Frameworks */,
+				70B9A5C422C826EF001804E4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -203,13 +244,36 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		70B9A5C422C826EF001804E4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7004241822C5502C00DE71CD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7004244322C557D000DE71CD /* PostsAPI.swift in Sources */,
 				7004242022C5502C00DE71CD /* AppDelegate.swift in Sources */,
 				7004242222C5502C00DE71CD /* SceneDelegate.swift in Sources */,
+				70B9A5C622C9244F001804E4 /* PostsModel.swift in Sources */,
+				70B9A5C822C92756001804E4 /* PostsPresenter.swift in Sources */,
 				7004242422C5502C00DE71CD /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70B9A5CB22C969B5001804E4 /* PostsPresenterTests.swift in Sources */,
 				7004243722C5502E00DE71CD /* BabylonDemoAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,6 +430,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "BabylonDemoApp/Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = BabylonDemoApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -384,6 +453,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "BabylonDemoApp/Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = BabylonDemoApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
