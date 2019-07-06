@@ -42,9 +42,9 @@ struct TestPostsInteractor: PostsInteractor {
     let comments: [Int: [Comment]]
     let users: [Int: User]
     
-    init(posts: [Post] = [], comments: [Int: [Comment]] = [:], users: [User] = []) {
+    init(posts: [Post] = [], comments: [Comment] = [], users: [User] = []) {
         self.posts = posts
-        self.comments = comments
+        self.comments = Dictionary(grouping: comments, by: { $0.postId })
         self.users = Dictionary(uniqueKeysWithValues: users.map { ($0.id, $0) })
     }
     
