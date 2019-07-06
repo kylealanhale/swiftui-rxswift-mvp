@@ -24,12 +24,79 @@ class PostsPresenterTests: XCTestCase {
         var emissions = 0
         let expectation = XCTestExpectation(description: "emitting new items")
         presenter.items.bind { items in
-            XCTAssertEqual(items.count, emissions)
+            XCTAssertEqual(emissions, items.count)
             
             emissions += 1
             if emissions == 2 {
                 expectation.fulfill()
             }
+        }
+        .disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func testItemPopulation() {
+        let expectedTitle = "Post title"
+        let expectedAuthor = "Some User"
+        let expectedDescription = "Post body"
+        let expectedCommentCount = 2
+        
+        let interactor = TestPostsInteractor(
+            posts: [Post(id: 0, userId: 0, title: expectedTitle, body: expectedDescription)],
+            comments: [
+                Comment(id: 0, postId: 0, email: "commenter1@server.com", name: "Comment", body: "Comment body"),
+                Comment(id: 1, postId: 0, email: "commenter2@server.com", name: "Comment", body: "Comment body")
+            ],
+            users: [User(id: 0, name: expectedAuthor, username: "username", email: "user@server.com")]
+        )
+        
+        let presenter = ProductionPostsPresenter(interactor: interactor)
+        let expectation = XCTestExpectation(description: "emitting new items")
+        presenter.items.skip(1).bind { items in
+            XCTAssertEqual(1, items.count)
+            XCTAssertEqual(expectedTitle, items[0].title)
+            XCTAssertEqual(expectedAuthor, items[0].author)
+            XCTAssertEqual(expectedDescription, items[0].description)
+            XCTAssertEqual(expectedCommentCount, items[0].commentCount)
+            
+            expectation.fulfill()
+        }
+        .disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testMultipleItems() {
+        let expectedAuthor1 = "Some User"
+        let expectedAuthor2 = "Another User"
+        
+        let interactor = TestPostsInteractor(
+            posts: [
+                Post(id: 0, userId: 0, title: "Post title", body: "Post body"),
+                Post(id: 1, userId: 1, title: "Post title", body: "Post body")
+            ],
+            comments: [
+                Comment(id: 0, postId: 0, email: "commenter1@server.com", name: "Comment", body: "Comment body"),
+                Comment(id: 1, postId: 1, email: "commenter2@server.com", name: "Comment", body: "Comment body"),
+                Comment(id: 2, postId: 0, email: "commenter2@server.com", name: "Comment", body: "Comment body")
+            ],
+            users: [
+                User(id: 0, name: expectedAuthor1, username: "username", email: "user@server.com"),
+                User(id: 1, name: expectedAuthor2, username: "username2", email: "user2@server.com")
+            ]
+        )
+        
+        let presenter = ProductionPostsPresenter(interactor: interactor)
+        let expectation = XCTestExpectation(description: "emitting new items")
+        presenter.items.skip(1).bind { items in
+            XCTAssertEqual(2, items.count)
+            XCTAssertEqual(2, items[0].commentCount)
+            XCTAssertEqual(1, items[1].commentCount)
+            XCTAssertEqual(expectedAuthor1, items[0].author)
+            XCTAssertEqual(expectedAuthor2, items[1].author)
+
+            expectation.fulfill()
         }
         .disposed(by: disposeBag)
         
