@@ -9,14 +9,14 @@
 import Foundation
 import RxSwift
 
-struct Post {
+struct Post: Codable {
     var id: Int
     var userId: Int
     var title: String
     var body: String
 }
 
-struct Comment {
+struct Comment: Codable {
     var id: Int
     var postId: Int
     var email: String
@@ -24,7 +24,7 @@ struct Comment {
     var body: String
 }
 
-struct User {
+struct User: Codable {
     var id: Int
     var name: String
     var username: String
@@ -35,4 +35,26 @@ protocol PostsInteractor {
     func getPosts() -> Observable<[Post]>
     func getComments(postId: Int) -> Observable<[Comment]>
     func getUser(userId: Int) -> Observable<User>
+}
+
+struct ProductionPostsInteractor: PostsInteractor {
+    func getComments(postId: Int) -> Observable<[Comment]> {
+        return getData(url: "http://jsonplaceholder.typicode.com/comments?postId=\(postId)", type: [Comment].self)
+    }
+    
+    func getUser(userId: Int) -> Observable<User> {
+        return getData(url: "http://jsonplaceholder.typicode.com/users/\(userId)", type: User.self)
+    }
+    
+    func getPosts() -> Observable<[Post]> {
+        return getData(url: "http://jsonplaceholder.typicode.com/posts", type: [Post].self)
+    }
+    
+    private func getData<T: Codable>(url: String, type: T.Type) -> Observable<T> {
+        guard let url = URL(string: url) else { return Observable.error(URLError(URLError.Code.badURL)) }
+        let request = URLRequest(url: url)
+        
+        return URLSession.shared.rx.data(request: request)
+            .map { data in try JSONDecoder().decode(type, from: data) }
+    }
 }
