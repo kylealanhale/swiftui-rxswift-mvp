@@ -1,23 +1,23 @@
 //
-//  ContentView.swift
+//  PostsView.swift
 //  BabylonDemoApp
 //
-//  Created by Kyle Alan Hale on 6/27/19.
+//  Created by Kyle Alan Hale on 7/7/19.
 //  Copyright © 2019 Kyle Alan Hale. All rights reserved.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+struct PostsView : View {
     var body: some View {
-        PostsView()
+        Text("Hello Posts!")
     }
 }
 
 #if DEBUG
-struct ContentView_Previews: PreviewProvider {
+struct PostsView_Previews : PreviewProvider {
     static var previews: some View {
-        ContentView()
+        PostsView()
     }
 }
 #endif
