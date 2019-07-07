@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 
 struct PostsListItem {
+    var id: Int
     var title: String
     var author: String
     var description: String
@@ -50,7 +51,7 @@ final class ProductionPostsPresenter: PostsPresenter {
                 .map { $0
                     .sorted(by: { $0.0 < $1.0 })
                     .map { (_, post, user, commentCount) in
-                        PostsListItem(title: post.title, author: user.name, description: post.body, commentCount: commentCount) }
+                        PostsListItem(id: post.id, title: post.title, author: user.name, description: post.body, commentCount: commentCount) }
                 }
             }
             .subscribe(onNext: { [weak self] items in
