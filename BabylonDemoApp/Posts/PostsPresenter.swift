@@ -20,15 +20,15 @@ struct PostsListItem {
     var commentCount: Int
 }
 
-protocol PostsPresenter: BindableObject {
+protocol PostsPresenter {
     init(interactor: PostsInteractor)
     var items: [PostsListItem] { get }
-    var errorMessage: String? { get }
+    var isOffline: Bool { get }
 }
 
-final class ProductionPostsPresenter: PostsPresenter {
+final class ProductionPostsPresenter: PostsPresenter, BindableObject {
     var items: [PostsListItem] = []
-    var errorMessage: String? = nil
+    var isOffline: Bool = false
     
     private let interactor: PostsInteractor
     
@@ -37,16 +37,16 @@ final class ProductionPostsPresenter: PostsPresenter {
         self.populate()
     }
     
-    private func populate() {
+    internal func populate() {
         interactor.getPosts()
             .flatMap { posts in  self.mergeDetails(posts) }
-            .subscribeOn(MainScheduler.instance)
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] items in
                 self?.items = items
-                self?.errorMessage = nil
+                self?.isOffline = false
                 self?.didChange.send()
             }, onError: { [weak self] error in
-                self?.errorMessage = "Could not retrieve new posts"
+                self?.isOffline = true
                 self?.didChange.send()
             })
             .disposed(by: self.disposeBag)
@@ -54,8 +54,8 @@ final class ProductionPostsPresenter: PostsPresenter {
     
     // Get details associated with each post, preserving order for later sorting
     private func mergeDetails(_ posts: [Post]) -> Observable<[PostsListItem]> {
-        // Take first 1000 posts only, since this implementation lacks paging
-        let posts = posts.prefix(1000)
+        // Take first 100 posts only in case API changes, since demo implementation lacks paging
+        let posts = posts.prefix(100)
         let bufferScheduler = SerialDispatchQueueScheduler(qos: .userInitiated)
 
         return Observable.merge(posts.enumerated().map { index, post in

@@ -39,24 +39,27 @@ protocol PostsInteractor {
 
 struct ProductionPostsInteractor: PostsInteractor {
     func getComments(postId: Int) -> Observable<[Comment]> {
-        return getData(url: "http://jsonplaceholder.typicode.com/comments?postId=\(postId)", type: [Comment].self)
+        return getData(url: "https://jsonplaceholder.typicode.com/comments?postId=\(postId)", type: [Comment].self)
     }
     
     func getUser(userId: Int) -> Observable<User> {
-        return getData(url: "http://jsonplaceholder.typicode.com/users/\(userId)", type: User.self)
+        return getData(url: "https://jsonplaceholder.typicode.com/users/\(userId)", type: User.self)
     }
     
     func getPosts() -> Observable<[Post]> {
-        return getData(url: "http://jsonplaceholder.typicode.com/posts", type: [Post].self)
+        return getData(url: "https://jsonplaceholder.typicode.com/posts", type: [Post].self)
     }
     
     private func getData<T: Codable>(url: String, type: T.Type) -> Observable<T> {
-        guard let url = URL(string: url) else { return Observable.error(URLError(URLError.Code.badURL)) }
+        guard let url = URL(string: url) else {
+            return Observable.error(URLError(URLError.Code.badURL))
+            
+        }
         let request = URLRequest(url: url)
         let scheduler = SerialDispatchQueueScheduler(qos: .utility)
         
         return URLSession.shared.rx.data(request: request)
-            .observeOn(scheduler)
+            .subscribeOn(scheduler)
             .map { data in try JSONDecoder().decode(type, from: data) }
     }
 }

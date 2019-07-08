@@ -11,8 +11,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationView {
-            PostsView(posts: [
-                PostsListItem(id: 0, title: "A post", author: "Some Author", description: "Hey there, it's a post", commentCount: 1)])
+            PostsView(presenter: ProductionPostsPresenter(interactor: ProductionPostsInteractor()))
         }
     }
 }
