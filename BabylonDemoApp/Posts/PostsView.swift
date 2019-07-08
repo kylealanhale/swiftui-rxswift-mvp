@@ -9,15 +9,26 @@
 import SwiftUI
 
 struct PostsView : View {
+    var posts: [PostsListItem]
+    
     var body: some View {
-        Text("Hello Posts!")
+        List(posts.map { ($0, Color.getRandomDark()) }.identified(by: \.0.id)) { (post, color) in
+            NavigationButton(destination: PostsDetailView(post: post, color: color)) {
+                HStack {
+                    Image(systemName: "bolt.horizontal.fill").foregroundColor(color)
+                    Text(post.title)
+                }
+            }
+        }
+        .navigationBarTitle(Text("Posts"))
     }
 }
 
-#if DEBUG
-struct PostsView_Previews : PreviewProvider {
-    static var previews: some View {
-        PostsView()
+
+
+private extension Color {
+    static func getRandomDark() -> Color {
+        let range = 0.3...0.6
+        return Color(red: .random(in: range), green: .random(in: range), blue: .random(in: range))
     }
 }
-#endif
