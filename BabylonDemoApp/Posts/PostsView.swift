@@ -33,13 +33,9 @@ struct PostsView : View {
     }
 }
 
-
-
 private extension Color {
     static func getRandom() -> Color {
         let range = 0.36...0.9
         return Color(red: .random(in: range), green: .random(in: range), blue: .random(in: range))
     }
 }
-
-

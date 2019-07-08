@@ -17,22 +17,33 @@ struct PostsDetailView : View {
             color
                 .opacity(0.1)
                 .edgesIgnoringSafeArea(.all)
-            VStack(alignment: .leading) {
-                HStack {
-                    Text("by \(post.author)").font(.headline)
+            ScrollView {
+                VStack(alignment: .leading) {
+                    Text(post.title)
+                        .font(.title)
                     Spacer()
-                    Text("\(post.commentCount) comment(s)").font(.headline)
+                    HStack {
+                        Text("by \(post.author)").font(.headline)
+                        Spacer()
+                        Text("\(post.commentCount) comment(s)").font(.headline)
+                    }
+                    HStack {
+                        Spacer()
+                        Image(systemName: "bolt.horizontal").padding()
+                        Spacer()
+                    }
+                    // Repeat content to force scrolling which for some reason corrects
+                    // (or hides, at least) SwiftUI layout bug described here:
+                    // https://stackoverflow.com/questions/56505929/the-text-doesnt-gets-wrap-in-swift-ui
+                    // This is extra strange because it doesn't just effect this view but also the title
+                    // view above, although it leaves this one still with a trailing truncation.
+                    Text(Array(repeating: post.description, count: 9).joined(separator: "\n\n"))
                 }
-                HStack {
-                    Spacer()
-                    Image(systemName: "bolt.horizontal").padding()
-                    Spacer()
-                }
-                Text(post.description)
-                Spacer().layoutPriority(1)
+                .lineLimit(nil)
+                .padding()
             }
-            .navigationBarTitle(Text(post.title))
-            .padding()
         }
+        .navigationBarTitle("Post", displayMode: .inline)
     }
 }
+
