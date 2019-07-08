@@ -28,7 +28,7 @@ struct PostsView : View {
             .navigationBarTitle(Text("Posts"))
             .navigationBarItems(trailing: presenter.isOffline ? Button(action: presenter.populate) { HStack {
                 Image(systemName: "bolt")
-                Text("Offline")
+                Text("Retry")
             } }.foregroundColor(.red) : nil)
     }
 }
