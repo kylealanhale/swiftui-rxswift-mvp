@@ -12,8 +12,7 @@ import RxSwift
 @testable import BabylonDemoApp
 
 class PostsPresenterTests: XCTestCase {
-    var disposeBag = DisposeBag()
-
+    
     func testItemsUpdates() {
         let interactor = TestPostsInteractor(
             posts: [Post(id: 0, userId: 0, title: "Post", body: "Post body")],
@@ -21,17 +20,13 @@ class PostsPresenterTests: XCTestCase {
         )
         
         let presenter = ProductionPostsPresenter(interactor: interactor)
-        var emissions = 0
         let expectation = XCTestExpectation(description: "emitting new items")
-        presenter.items.bind { items in
-            XCTAssertEqual(emissions, items.count)
-            
-            emissions += 1
-            if emissions == 2 {
-                expectation.fulfill()
-            }
+        
+        XCTAssertEqual(0, presenter.items.count)
+        _ = presenter.didChange.sink {
+            XCTAssertEqual(1, presenter.items.count)
+            expectation.fulfill()
         }
-        .disposed(by: disposeBag)
         
         wait(for: [expectation], timeout: 1)
     }
@@ -53,7 +48,8 @@ class PostsPresenterTests: XCTestCase {
         
         let presenter = ProductionPostsPresenter(interactor: interactor)
         let expectation = XCTestExpectation(description: "emitting new items")
-        presenter.items.skip(1).bind { items in
+        _ = presenter.didChange.sink {
+            let items = presenter.items
             XCTAssertEqual(1, items.count)
             XCTAssertEqual(expectedTitle, items[0].title)
             XCTAssertEqual(expectedAuthor, items[0].author)
@@ -62,7 +58,6 @@ class PostsPresenterTests: XCTestCase {
             
             expectation.fulfill()
         }
-        .disposed(by: disposeBag)
         
         wait(for: [expectation], timeout: 1)
     }
@@ -89,7 +84,8 @@ class PostsPresenterTests: XCTestCase {
         
         let presenter = ProductionPostsPresenter(interactor: interactor)
         let expectation = XCTestExpectation(description: "emitting new items")
-        presenter.items.skip(1).bind { items in
+        _ = presenter.didChange.sink {
+            let items = presenter.items
             XCTAssertEqual(2, items.count)
             XCTAssertEqual(2, items[0].commentCount)
             XCTAssertEqual(1, items[1].commentCount)
@@ -98,7 +94,6 @@ class PostsPresenterTests: XCTestCase {
 
             expectation.fulfill()
         }
-        .disposed(by: disposeBag)
         
         wait(for: [expectation], timeout: 1)
     }

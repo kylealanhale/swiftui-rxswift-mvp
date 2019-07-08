@@ -53,8 +53,10 @@ struct ProductionPostsInteractor: PostsInteractor {
     private func getData<T: Codable>(url: String, type: T.Type) -> Observable<T> {
         guard let url = URL(string: url) else { return Observable.error(URLError(URLError.Code.badURL)) }
         let request = URLRequest(url: url)
+        let scheduler = SerialDispatchQueueScheduler(qos: .utility)
         
         return URLSession.shared.rx.data(request: request)
+            .observeOn(scheduler)
             .map { data in try JSONDecoder().decode(type, from: data) }
     }
 }

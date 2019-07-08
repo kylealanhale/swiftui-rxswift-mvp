@@ -9,6 +9,8 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import SwiftUI
+import Combine
 
 struct PostsListItem {
     var id: Int
@@ -18,15 +20,17 @@ struct PostsListItem {
     var commentCount: Int
 }
 
-protocol PostsPresenter {
+protocol PostsPresenter: BindableObject {
     init(interactor: PostsInteractor)
-    var items: BehaviorRelay<[PostsListItem]> { get }
-    var errorMessage: BehaviorRelay<String?> { get }
+    var items: [PostsListItem] { get }
+    var errorMessage: String? { get }
 }
 
 final class ProductionPostsPresenter: PostsPresenter {
-    var items: BehaviorRelay<[PostsListItem]> = BehaviorRelay(value: [])
-    var errorMessage: BehaviorRelay<String?> = BehaviorRelay(value: nil)
+    var didChange = PassthroughSubject<Void, Never>()
+    
+    var items: [PostsListItem] = []
+    var errorMessage: String? = nil
     
     init(interactor: PostsInteractor) {
         self.populate(interactor: interactor)
@@ -54,13 +58,17 @@ final class ProductionPostsPresenter: PostsPresenter {
                         PostsListItem(id: post.id, title: post.title, author: user.name, description: post.body, commentCount: commentCount) }
                 }
             }
+            .subscribeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] items in
-                self?.items.accept(items)
-            }, onError: { [weak self] error in
-                self?.errorMessage.accept("Could not retrieve posts")
+                self?.items = items
+                self?.errorMessage = nil
+                self?.didChange.send()
+                }, onError: { [weak self] error in
+                    self?.errorMessage = "Could not retrieve new posts"
+                    self?.didChange.send()
             })
             .disposed(by: self.disposeBag)
     }
-
+    
     private let disposeBag = DisposeBag()
 }
