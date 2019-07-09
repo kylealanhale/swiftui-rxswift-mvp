@@ -9,10 +9,9 @@
 import XCTest
 import RxSwift
 
-@testable import BabylonDemoApp
+@testable import PostsApp
 
 class PostsPresenterTests: XCTestCase {
-    
     func testItemsUpdates() {
         let interactor = TestPostsInteractor(
             posts: [Post(id: 0, userId: 0, title: "Post", body: "Post body")],
