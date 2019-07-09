@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		7004242022C5502C00DE71CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7004241F22C5502C00DE71CD /* AppDelegate.swift */; };
 		7004242222C5502C00DE71CD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7004242122C5502C00DE71CD /* SceneDelegate.swift */; };
-		7004242422C5502C00DE71CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7004242322C5502C00DE71CD /* ContentView.swift */; };
+		7004242422C5502C00DE71CD /* SceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7004242322C5502C00DE71CD /* SceneView.swift */; };
 		7004242622C5502E00DE71CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7004242522C5502E00DE71CD /* Assets.xcassets */; };
 		7004242922C5502E00DE71CD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7004242822C5502E00DE71CD /* Preview Assets.xcassets */; };
 		7004242C22C5502E00DE71CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7004242A22C5502E00DE71CD /* LaunchScreen.storyboard */; };
@@ -36,7 +36,7 @@
 		7004241C22C5502C00DE71CD /* BabylonDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabylonDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7004241F22C5502C00DE71CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7004242122C5502C00DE71CD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7004242322C5502C00DE71CD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7004242322C5502C00DE71CD /* SceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneView.swift; sourceTree = "<group>"; };
 		7004242522C5502E00DE71CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7004242822C5502E00DE71CD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7004242B22C5502E00DE71CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -95,14 +95,11 @@
 		7004241E22C5502C00DE71CD /* BabylonDemoApp */ = {
 			isa = PBXGroup;
 			children = (
+				7013AECB22D40ED7004AC167 /* App */,
 				7066D5F322D2B2B300702CF9 /* Posts */,
-				7004241F22C5502C00DE71CD /* AppDelegate.swift */,
-				7004242122C5502C00DE71CD /* SceneDelegate.swift */,
-				7004242322C5502C00DE71CD /* ContentView.swift */,
-				7004242522C5502E00DE71CD /* Assets.xcassets */,
-				7004242A22C5502E00DE71CD /* LaunchScreen.storyboard */,
-				7004242D22C5502E00DE71CD /* Info.plist */,
 				7004242722C5502E00DE71CD /* Preview Content */,
+				7004242522C5502E00DE71CD /* Assets.xcassets */,
+				7004242D22C5502E00DE71CD /* Info.plist */,
 			);
 			path = BabylonDemoApp;
 			sourceTree = "<group>";
@@ -122,6 +119,17 @@
 				70B9A5CA22C969B5001804E4 /* PostsPresenterTests.swift */,
 			);
 			path = BabylonDemoAppTests;
+			sourceTree = "<group>";
+		};
+		7013AECB22D40ED7004AC167 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				7004242A22C5502E00DE71CD /* LaunchScreen.storyboard */,
+				7004241F22C5502C00DE71CD /* AppDelegate.swift */,
+				7004242122C5502C00DE71CD /* SceneDelegate.swift */,
+				7004242322C5502C00DE71CD /* SceneView.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 		7066D5F322D2B2B300702CF9 /* Posts */ = {
@@ -279,7 +287,7 @@
 				70B9A5C622C9244F001804E4 /* PostsModel.swift in Sources */,
 				7066D5F522D2B9DC00702CF9 /* PostsDetailView.swift in Sources */,
 				70B9A5C822C92756001804E4 /* PostsPresenter.swift in Sources */,
-				7004242422C5502C00DE71CD /* ContentView.swift in Sources */,
+				7004242422C5502C00DE71CD /* SceneView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

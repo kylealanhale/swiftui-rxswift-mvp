@@ -31,6 +31,8 @@ struct User: Codable {
     var email: String
 }
 
+
+
 protocol PostsInteractor {
     func getPosts() -> Observable<[Post]>
     func getComments(postId: Int) -> Observable<[Comment]>

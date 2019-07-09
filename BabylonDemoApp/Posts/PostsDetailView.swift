@@ -14,6 +14,7 @@ struct PostsDetailView : View {
     
     var body: some View {
         ZStack {
+            // Use post color to create a lighter-colored background
             color
                 .opacity(0.1)
                 .edgesIgnoringSafeArea(.all)
@@ -33,10 +34,8 @@ struct PostsDetailView : View {
                         Spacer()
                     }
                     // Repeat content to force scrolling which for some reason corrects
-                    // (or hides, at least) SwiftUI layout bug described here:
+                    // (or improves, at least) SwiftUI layout lineLimit(nil) bug described here:
                     // https://stackoverflow.com/questions/56505929/the-text-doesnt-gets-wrap-in-swift-ui
-                    // This is extra strange because it doesn't just effect this view but also the title
-                    // view above, although it leaves this one still with a trailing truncation.
                     Text(Array(repeating: post.description, count: 9).joined(separator: "\n\n"))
                 }
                 .lineLimit(nil)

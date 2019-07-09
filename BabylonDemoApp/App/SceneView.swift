@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  SceneView.swift
 //  BabylonDemoApp
 //
 //  Created by Kyle Alan Hale on 6/27/19.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct SceneView: View {
     var body: some View {
         NavigationView {
             PostsView(presenter: ProductionPostsPresenter(interactor: ProductionPostsInteractor()))

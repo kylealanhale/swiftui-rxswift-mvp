@@ -37,9 +37,10 @@ final class ProductionPostsPresenter: PostsPresenter, BindableObject {
         self.populate()
     }
     
+    // Populate list of items from RxSwift model and let SwiftUI view know about it
     internal func populate() {
         interactor.getPosts()
-            .flatMap { posts in  self.mergeDetails(posts) }
+            .flatMap { posts in self.mergeDetails(posts) }
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] items in
                 self?.items = items
@@ -51,7 +52,9 @@ final class ProductionPostsPresenter: PostsPresenter, BindableObject {
             })
             .disposed(by: self.disposeBag)
     }
-    
+    var didChange = PassthroughSubject<Void, Never>()
+    private let disposeBag = DisposeBag()
+
     // Get details associated with each post, preserving order for later sorting
     private func mergeDetails(_ posts: [Post]) -> Observable<[PostsListItem]> {
         // Take first 100 posts only in case API changes, since demo implementation lacks paging
@@ -76,7 +79,4 @@ final class ProductionPostsPresenter: PostsPresenter, BindableObject {
                 PostsListItem(id: post.id, title: post.title, author: user.name, description: post.body, commentCount: commentCount) }
         }
     }
-
-    var didChange = PassthroughSubject<Void, Never>()
-    private let disposeBag = DisposeBag()
 }
