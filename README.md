@@ -4,13 +4,9 @@ While it may be ideal to have an end-to-end [RxSwift](https://github.com/Reactiv
 
 ## Setup
 
-Make sure you've installed Xcode 11 beta 3 or greater and used `xcode-select` to make it your default version. Then download and build dependencies with [Carthage](https://github.com/Carthage/Carthage):
+Requires Xcode 11.
 
-```
-$ carthage bootstrap --platform ios
-```
-
-After it finishes building, open PostsApp.xcodeproj and run the PostsApp target to launch the app. It will load a list of [jsonplaceholder](http://jsonplaceholder.typicode.com/) posts, which will be persisted for offline access. If the app is launched for the first time while offline a "Retry" button will be shown.
+Open the PostsApp project and wait for the dependencies to download before running the PostsApp target to launch the app. It will load a list of [jsonplaceholder](http://jsonplaceholder.typicode.com/) posts, which will be persisted for offline access. If the app is launched for the first time while offline a "Retry" button will be shown.
 
 There is also a test target that exercises the presenter's RxSwift code for aggregating the posts list data, as described below.
 
