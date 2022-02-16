@@ -9,13 +9,11 @@
 import SwiftUI
 
 struct PostsView : View {
-    @ObjectBinding var presenter: ProductionPostsPresenter
+    @ObservedObject var presenter: ProductionPostsPresenter
     
     var body: some View {
-        List(presenter
-            .items
-            .map { ($0, Color.getRandom()) }  // Associate a random icon/background color with each post
-            .identified(by: \.0.id)  // Identify each post's list item by its ID
+        List(presenter.items.map { ($0, Color.getRandom()) },   // Associate a random icon/background color with each post
+             id: \.0.id                                         // Identify each post's list item by its ID
         ) { (post, color) in
             NavigationLink(destination: PostsDetailView(post: post, color: color)) {
                 HStack {
