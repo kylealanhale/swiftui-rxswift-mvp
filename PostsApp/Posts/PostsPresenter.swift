@@ -26,9 +26,9 @@ protocol PostsPresenter {
     var isOffline: Bool { get }
 }
 
-final class ProductionPostsPresenter: PostsPresenter, BindableObject {
-    var items: [PostsListItem] = []
-    var isOffline: Bool = false
+final class ProductionPostsPresenter: PostsPresenter, ObservableObject {
+    @Published var items: [PostsListItem] = []
+    @Published var isOffline: Bool = false
     
     private let interactor: PostsInteractor
     
@@ -45,14 +45,12 @@ final class ProductionPostsPresenter: PostsPresenter, BindableObject {
             .subscribe(onNext: { [weak self] items in
                 self?.items = items
                 self?.isOffline = false
-                self?.didChange.send()
             }, onError: { [weak self] error in
                 self?.isOffline = true
-                self?.didChange.send()
             })
             .disposed(by: self.disposeBag)
     }
-    var didChange = PassthroughSubject<Void, Never>()
+    
     private let disposeBag = DisposeBag()
 
     // Get details associated with each post, preserving order for later sorting
